@@ -7,6 +7,7 @@ import ChatBox from "../components/ChatBox";
 
 const ChatPage = () => {
   const { user } = ChatState();
+  const [fetchAgain, setFetchAgain] = React.useState(false);
 
   return (
     <div style={{ width: "100%" }}>
@@ -20,8 +21,8 @@ const ChatPage = () => {
         p={"10px"}
 
       >
-        {user && <MyChats />}
-        {user && <ChatBox />}
+        {user && <MyChats fetchAgain={fetchAgain} />}
+        {user && <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />}
       </Box>
     </div>
   );
