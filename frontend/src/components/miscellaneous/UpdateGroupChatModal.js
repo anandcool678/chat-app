@@ -27,7 +27,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
   const [loading, setLoading] = useState(false);
   const [renameloading, setRenameloading] = useState(false);
   const toast = useToast();
-  const { user, selectedChat, setSelectedChat, chats ,setChats} = ChatState();
+  const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
   const handleRemove = async (user1) => {
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
@@ -102,13 +102,13 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
       const new1 = chats.map((u) => {
         // console.log(u)
         if (u?._id === selectedChat._id) {
-          const newdt = { ...u, chatName: groupChatName};
+          const newdt = { ...u, chatName: groupChatName };
           return newdt;
         } else return u;
       });
       fetchMessages();
 
-      setChats(new1)
+      setChats(new1);
 
       setRenameloading(false);
       onClose();
@@ -128,29 +128,26 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
   };
 
   const handleAddUser = async (user1) => {
-    if(selectedChat.users.find((u)=>u._id===user1._id)){
+    if (selectedChat.users.find((u) => u._id === user1._id)) {
       toast({
         title: "User already in the group",
         status: "warning",
         duration: 3000,
         isClosable: true,
         position: "bottom",
-
       });
-      return ;
-
+      return;
     }
 
-    if(selectedChat.groupAdmin._id!==user._id){
+    if (selectedChat.groupAdmin._id !== user._id) {
       toast({
-        title:"Only admin can add users",
-        status:"warning",
-        duration:3000,
-        isClosable:true,
-        position:"bottom"
-
+        title: "Only admin can add users",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
       });
-      return ;
+      return;
     }
     try {
       setLoading(true);
@@ -160,28 +157,30 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
         },
       };
 
-      const {data} = await axios.put(`/api/chat/groupadd`,{
-        chatId:selectedChat._id,
-        userId:user1._id
-      }, config);
+      const { data } = await axios.put(
+        `/api/chat/groupadd`,
+        {
+          chatId: selectedChat._id,
+          userId: user1._id,
+        },
+        config
+      );
 
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
       setLoading(false);
-
     } catch (error) {
-        toast({
-          title: "Error Occured!",
-          description: error.response,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
-        });
-        setLoading(false);
+      toast({
+        title: "Error Occured!",
+        description: error.response,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
     }
   };
-
 
   const handleSearch = async (query) => {
     setSearch(query);
@@ -267,14 +266,15 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
-            {loading?(
+            {loading ? (
               <Spinner size={"lg"} />
-            ):(
+            ) : (
               searchresult?.map((user) => (
                 <UserListItem
-                  key = {user._id}
+                  key={user._id}
                   user={user}
-                  handleFunction={() => handleAddUser(user)} />
+                  handleFunction={() => handleAddUser(user)}
+                />
               ))
             )}
           </ModalBody>
