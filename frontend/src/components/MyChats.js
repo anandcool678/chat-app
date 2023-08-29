@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { ChatState } from '../Context/ChatProvider';
-import { Avatar, Box, Button, Stack, Text, useToast } from '@chakra-ui/react';
-import { set } from 'mongoose';
+import { Box, Button, Stack, Text, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { AddIcon } from '@chakra-ui/icons';
 import ChatLoading from './ChatLoading';
@@ -39,7 +38,6 @@ const MyChats = ({fetchAgain}) => {
   useEffect(()=>{
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-    console.log(fetchAgain,"fetch");
   },[fetchAgain]);
 
   return (
