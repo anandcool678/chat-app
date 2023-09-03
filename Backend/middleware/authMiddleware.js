@@ -17,6 +17,9 @@ const protect = asyncHandler(async(req, res, next) => {
             
             next();
         } catch(error){
+            if(err instanceof jwt.TokenExpiredError) {
+                return attemptRenewal()
+            }
             console.error(error);
             res.status(401);
             throw new Error("Not authorized, token failed");

@@ -9,13 +9,12 @@ const messageRoutes = require("./routes/messageRoutes");
 
 const {notFound, errorHandler} = require('./middleware/errorMiddleware');
 
-const app = express();
-
-
-app.use(express.json());
-
 dotenv.config();
 connectDB();
+
+const app = express();
+app.use(express.json());
+
 const PORT = process.env.PORT || 5000;
 
 
@@ -44,7 +43,6 @@ io.on("connection",(socket)=>{
     console.log("connected to socket.io");
     socket.on('setup',(userData)=>{
         socket.join(userData._id);
-        console.log(userData._id);
         socket.emit('connected');
     });
 

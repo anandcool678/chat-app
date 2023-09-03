@@ -51,7 +51,7 @@ const Singup = () => {
         });
         return;
     }
-    console.log(name);
+    // console.log(name);
 
     try{
         const config = {
@@ -114,11 +114,11 @@ const Singup = () => {
         .then((res) => res.json())
         .then((data) => {
           setPic(data.url.toString());
-          console.log(data);
+          // console.log(data);
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           setLoading(false);
         });
     } else {
