@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon Backend/server.js",
     "server": "nodemon Backend/server.js",
-    "build": "npm install --leagcy-peer-deps && npm install --leagcy-peer-deps --prefix frontend && nupm run build --prefix frontend"
+    "build": "npm install && npm install --prefix frontend && nupm run build --prefix frontend"
   },
   "author": "Anand Prakash Dwivedi",
   "license": "ISC",
