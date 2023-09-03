@@ -18,8 +18,7 @@ import axios from "axios";
 import "./styles.css";
 import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
-import { set } from "mongoose";
-import animationData from "../animations/typing.json";
+
 
 
 const ENDPOINT = "http://localhost:5000";
@@ -34,14 +33,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [isTyping, setIsTyping] = useState(false);
   const toast = useToast();
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  // const defaultOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: animationData,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
 
   const { user, selectedChat, setSelectedChat, notification, setNotification} = ChatState();
 
@@ -86,11 +85,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     socket.on("stop typing", () => {
       setIsTyping(false);
     });
+     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     fetchMessages();
     selectedChatCompare = selectedChat;
+     // eslint-disable-next-line
   }, [selectedChat]);
   console.log(notification,"jkjh");
   useEffect(() => {
